@@ -217,6 +217,7 @@ Feature: Test ability to make payment to individual with bank account
     And Status of transaction is "COMPLETED"
     And My total txns 8 and successful txn count in response should Match
 
+  @commonExtended
   Scenario:BB-FSP 007 Bulk Transfer with ClosedLoop and GSMA
     #payer 1 creation
     Given I have Fineract-Platform-TenantId as "payerfsp2"
