@@ -21,6 +21,8 @@ public class ChannelConnectorConfig {
     public String collectionEndpoint;
     @Value("${channel-connector.endpoints.transferReq}")
     public String transferReqEndpoint;
+    @Value("${channel-connector.endpoints.gsma-transaction}")
+    private String gsmaTransactionEndpoint;
 
     public String transferUrl;
 
@@ -32,6 +34,10 @@ public class ChannelConnectorConfig {
 
     public void setRequestType(String requestType) {
         this.requestType = requestType;
+    }
+
+    public String getGsmaTransactionEndpoint() {
+        return gsmaTransactionEndpoint;
     }
 
     @PostConstruct

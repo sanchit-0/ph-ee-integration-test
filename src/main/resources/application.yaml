@@ -39,9 +39,11 @@ channel-connector:
     transfer: "/channel/transfer"
     gsma-p2p: "/channel/gsma/transfer"
     gsma-deposit: "/channel/gsma/deposit"
+    gsma-transaction: "/channel/gsma/transaction"
     collection: "/channel/collection"
     transferReq: "/channel/transactionRequest"
     actuator: "/actuator/health"
+
 
 
 max-retry-count: 5
@@ -275,3 +277,5 @@ fspconfig:
     payerfsp2: "gorilla"
 
 totalvouchers: 30
+
+amsName: "mifos"

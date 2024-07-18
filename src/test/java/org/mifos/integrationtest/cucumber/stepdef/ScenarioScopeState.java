@@ -115,8 +115,11 @@ public class ScenarioScopeState {
     protected String cancelVoucherBody;
     protected String suspendVoucherBody;
     protected String registeringInstitutionId;
+    protected String accountHoldingInstitutionId;
+    protected String amsName;
     protected String agentId;
     protected String fetchVoucherResponseBody;
-
+    protected String createTransactionChannelRequestBody;
+    protected String createGsmaTransferRequestBody;
     protected String rtpId;
 }
