@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 public class ValidateGsmaDef extends BaseStepDef {
+
     @Autowired
     ScenarioScopeState scenarioScopeState;
 
@@ -44,9 +45,10 @@ public class ValidateGsmaDef extends BaseStepDef {
     public void iCanCreateANegativeGsmaTransferDTO() {
         GsmaTransactionHelper gsmaTransactionHelper = new GsmaTransactionHelper();
         List<CustomData> customDataList = new ArrayList<>();
-        customDataList = gsmaTransactionHelper.customDataListHelper(customDataList,"string","string");
-        List<Party> payerList = gsmaTransactionHelper.partyListHelper("MSISDN","+44999911");
-        GsmaTransfer gsmaTransferDTO = gsmaTransactionHelper.gsmaTransferHelper("string","inbound","transfer","100","SNR","string","2022-09-28T12:51:19.260+00:00",customDataList,payerList,null);
+        customDataList = gsmaTransactionHelper.customDataListHelper(customDataList, "string", "string");
+        List<Party> payerList = gsmaTransactionHelper.partyListHelper("MSISDN", "+44999911");
+        GsmaTransfer gsmaTransferDTO = gsmaTransactionHelper.gsmaTransferHelper("string", "inbound", "transfer", "100", "SNR", "string",
+                "2022-09-28T12:51:19.260+00:00", customDataList, payerList, null);
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             scenarioScopeState.createGsmaTransferRequestBody = objectMapper.writeValueAsString(gsmaTransferDTO);
@@ -59,10 +61,11 @@ public class ValidateGsmaDef extends BaseStepDef {
     public void iCanCreateAGsmaTransferDTO() {
         GsmaTransactionHelper gsmaTransactionHelper = new GsmaTransactionHelper();
         List<CustomData> customDataList = new ArrayList<>();
-        customDataList = gsmaTransactionHelper.customDataListHelper(customDataList,"string","string");
-        List<Party> payerList = gsmaTransactionHelper.partyListHelper("MSISDN","+44999911");
-        List<Party> payeeList = gsmaTransactionHelper.partyListHelper("MSISDN","+44999911");
-        GsmaTransfer gsmaTransferDTO = gsmaTransactionHelper.gsmaTransferHelper("string","inbound","transfer","100","SNR","string","2022-09-28T12:51:19.260+00:00",customDataList,payerList,payeeList);
+        customDataList = gsmaTransactionHelper.customDataListHelper(customDataList, "string", "string");
+        List<Party> payerList = gsmaTransactionHelper.partyListHelper("MSISDN", "+44999911");
+        List<Party> payeeList = gsmaTransactionHelper.partyListHelper("MSISDN", "+44999911");
+        GsmaTransfer gsmaTransferDTO = gsmaTransactionHelper.gsmaTransferHelper("string", "inbound", "transfer", "100", "SNR", "string",
+                "2022-09-28T12:51:19.260+00:00", customDataList, payerList, payeeList);
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             scenarioScopeState.createGsmaTransferRequestBody = objectMapper.writeValueAsString(gsmaTransferDTO);

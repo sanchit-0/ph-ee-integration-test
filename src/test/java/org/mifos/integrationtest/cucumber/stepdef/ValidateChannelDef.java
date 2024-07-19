@@ -37,9 +37,9 @@ public class ValidateChannelDef extends BaseStepDef {
     @Given("I can create a TransactionChannelRequestDTO with no payee")
     public void iCanCreateATransactionChannelRequestDTOWithNoPayee() {
         TransactionHelper transactionHelper = new TransactionHelper();
-        Party payer = transactionHelper.partyHelper(IdentifierType.MSISDN,"27710101999");
-        MoneyData amount = transactionHelper.amountHelper("100","SNR");
-        TransactionChannelRequestDTO requestDTO = transactionHelper.transactionChannelRequestHelper(payer,null,amount);
+        Party payer = transactionHelper.partyHelper(IdentifierType.MSISDN, "27710101999");
+        MoneyData amount = transactionHelper.amountHelper("100", "SNR");
+        TransactionChannelRequestDTO requestDTO = transactionHelper.transactionChannelRequestHelper(payer, null, amount);
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             scenarioScopeState.createTransactionChannelRequestBody = objectMapper.writeValueAsString(requestDTO);
@@ -50,29 +50,29 @@ public class ValidateChannelDef extends BaseStepDef {
 
     @When("I call the post transfer API with expected status of {int}")
     public void iCallThePostTransferAPIWithExpectedStatusOf(int expectedStatus) {
-            RequestSpecification requestSpec = Utils.getDefaultSpec();
-            scenarioScopeState.tenant = tenant;
-            scenarioScopeState.response = RestAssured.given(requestSpec).header("Content-Type", "application/json")
-                    .header(tenantHeader, scenarioScopeState.tenant).baseUri(channelConnectorConfig.channelConnectorContactPoint)
-                    .body(scenarioScopeState.createTransactionChannelRequestBody).expect()
-                    .spec(new ResponseSpecBuilder().expectStatusCode(expectedStatus).build()).when()
-                    .post(channelConnectorConfig.transferEndpoint).andReturn().asString();
+        RequestSpecification requestSpec = Utils.getDefaultSpec();
+        scenarioScopeState.tenant = tenant;
+        scenarioScopeState.response = RestAssured.given(requestSpec).header("Content-Type", "application/json")
+                .header(tenantHeader, scenarioScopeState.tenant).baseUri(channelConnectorConfig.channelConnectorContactPoint)
+                .body(scenarioScopeState.createTransactionChannelRequestBody).expect()
+                .spec(new ResponseSpecBuilder().expectStatusCode(expectedStatus).build()).when()
+                .post(channelConnectorConfig.transferEndpoint).andReturn().asString();
 
-            logger.info("Post Transfer Response: {}", scenarioScopeState.response);
+        logger.info("Post Transfer Response: {}", scenarioScopeState.response);
     }
 
     @When("I call the transaction request API with expected status of {int}")
     public void iCallTheTransactionRequestAPIWithExpectedStatusOf(int expectedStatus) {
-            RequestSpecification requestSpec = Utils.getDefaultSpec();
+        RequestSpecification requestSpec = Utils.getDefaultSpec();
 
-            scenarioScopeState.tenant = tenant;
-            scenarioScopeState.response = RestAssured.given(requestSpec).header("Content-Type", "application/json")
-                    .header(tenantHeader, scenarioScopeState.tenant).baseUri(channelConnectorConfig.channelConnectorContactPoint)
-                    .body(scenarioScopeState.createTransactionChannelRequestBody).expect()
-                    .spec(new ResponseSpecBuilder().expectStatusCode(expectedStatus).build()).when()
-                    .post(channelConnectorConfig.transferReqEndpoint).andReturn().asString();
+        scenarioScopeState.tenant = tenant;
+        scenarioScopeState.response = RestAssured.given(requestSpec).header("Content-Type", "application/json")
+                .header(tenantHeader, scenarioScopeState.tenant).baseUri(channelConnectorConfig.channelConnectorContactPoint)
+                .body(scenarioScopeState.createTransactionChannelRequestBody).expect()
+                .spec(new ResponseSpecBuilder().expectStatusCode(expectedStatus).build()).when()
+                .post(channelConnectorConfig.transferReqEndpoint).andReturn().asString();
 
-            logger.info("Transaction Request Response: {}", scenarioScopeState.response);
+        logger.info("Transaction Request Response: {}", scenarioScopeState.response);
     }
 
     @And("I should be able to assert the api validation for schema validation error response")
@@ -108,10 +108,10 @@ public class ValidateChannelDef extends BaseStepDef {
     @Given("I can create a TransactionChannelRequestDTO")
     public void iCreateATransactionChannelRequestDTO() {
         TransactionHelper transactionHelper = new TransactionHelper();
-        Party payer = transactionHelper.partyHelper(IdentifierType.MSISDN,"27710101999");
-        Party payee = transactionHelper.partyHelper(IdentifierType.MSISDN,"27710101999");
-        MoneyData amount = transactionHelper.amountHelper("100","SNR");
-        TransactionChannelRequestDTO requestDTO = transactionHelper.transactionChannelRequestHelper(payer,payee,amount);
+        Party payer = transactionHelper.partyHelper(IdentifierType.MSISDN, "27710101999");
+        Party payee = transactionHelper.partyHelper(IdentifierType.MSISDN, "27710101999");
+        MoneyData amount = transactionHelper.amountHelper("100", "SNR");
+        TransactionChannelRequestDTO requestDTO = transactionHelper.transactionChannelRequestHelper(payer, payee, amount);
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             scenarioScopeState.createTransactionChannelRequestBody = objectMapper.writeValueAsString(requestDTO);
@@ -122,53 +122,49 @@ public class ValidateChannelDef extends BaseStepDef {
 
     @When("I call the post transfer API having unsupported header with expected status of {int}")
     public void iCallThePostTransferAPIHavingUnsupportedHeaderWithExpectedStatusOf(int expectedStatus) {
-            RequestSpecification requestSpec = Utils.getDefaultSpec();
-            scenarioScopeState.tenant = tenant;
-            scenarioScopeState.response = RestAssured.given(requestSpec).header("Content-Type", "application/json")
-                    .header(tenantHeader, scenarioScopeState.tenant).header("invalid-header", "test")
-                    .baseUri(channelConnectorConfig.channelConnectorContactPoint)
-                    .body(scenarioScopeState.createTransactionChannelRequestBody).expect()
-                    .spec(new ResponseSpecBuilder().expectStatusCode(expectedStatus).build()).when()
-                    .post(channelConnectorConfig.transferEndpoint).andReturn().asString();
+        RequestSpecification requestSpec = Utils.getDefaultSpec();
+        scenarioScopeState.tenant = tenant;
+        scenarioScopeState.response = RestAssured.given(requestSpec).header("Content-Type", "application/json")
+                .header(tenantHeader, scenarioScopeState.tenant).header("invalid-header", "test")
+                .baseUri(channelConnectorConfig.channelConnectorContactPoint).body(scenarioScopeState.createTransactionChannelRequestBody)
+                .expect().spec(new ResponseSpecBuilder().expectStatusCode(expectedStatus).build()).when()
+                .post(channelConnectorConfig.transferEndpoint).andReturn().asString();
 
-            logger.info("Post Transfer Response: {}", scenarioScopeState.response);
+        logger.info("Post Transfer Response: {}", scenarioScopeState.response);
     }
 
     @When("I call the transaction request API having unsupported header with expected status of {int}")
     public void iCallTheTransactionRequestAPIHavingUnsupportedHeaderWithExpectedStatusOf(int expectedStatus) {
-            RequestSpecification requestSpec = Utils.getDefaultSpec();
-            scenarioScopeState.tenant = tenant;
-            scenarioScopeState.response = RestAssured.given(requestSpec).header("Content-Type", "application/json")
-                    .header(tenantHeader, scenarioScopeState.tenant).header("invalid-header", "test")
-                    .baseUri(channelConnectorConfig.channelConnectorContactPoint)
-                    .body(scenarioScopeState.createTransactionChannelRequestBody).expect()
-                    .spec(new ResponseSpecBuilder().expectStatusCode(expectedStatus).build()).when()
-                    .post(channelConnectorConfig.transferReqEndpoint).andReturn().asString();
+        RequestSpecification requestSpec = Utils.getDefaultSpec();
+        scenarioScopeState.tenant = tenant;
+        scenarioScopeState.response = RestAssured.given(requestSpec).header("Content-Type", "application/json")
+                .header(tenantHeader, scenarioScopeState.tenant).header("invalid-header", "test")
+                .baseUri(channelConnectorConfig.channelConnectorContactPoint).body(scenarioScopeState.createTransactionChannelRequestBody)
+                .expect().spec(new ResponseSpecBuilder().expectStatusCode(expectedStatus).build()).when()
+                .post(channelConnectorConfig.transferReqEndpoint).andReturn().asString();
 
-            logger.info("Transaction Request Response: {}", scenarioScopeState.response);
+        logger.info("Transaction Request Response: {}", scenarioScopeState.response);
     }
 
     @When("I call the post transfer API without required header Platform-TenantId with expected status of {int}")
     public void iCallThePostTransferAPINotHavingRequiredHeaderPlatformTenantIdWithExpectedStatusOf(int expectedStatus) {
-            RequestSpecification requestSpec = Utils.getDefaultSpec();
-            scenarioScopeState.response = RestAssured.given(requestSpec).header("Content-Type", "application/json")
-                    .baseUri(channelConnectorConfig.channelConnectorContactPoint)
-                    .body(scenarioScopeState.createTransactionChannelRequestBody).expect()
-                    .spec(new ResponseSpecBuilder().expectStatusCode(expectedStatus).build()).when()
-                    .post(channelConnectorConfig.transferEndpoint).andReturn().asString();
+        RequestSpecification requestSpec = Utils.getDefaultSpec();
+        scenarioScopeState.response = RestAssured.given(requestSpec).header("Content-Type", "application/json")
+                .baseUri(channelConnectorConfig.channelConnectorContactPoint).body(scenarioScopeState.createTransactionChannelRequestBody)
+                .expect().spec(new ResponseSpecBuilder().expectStatusCode(expectedStatus).build()).when()
+                .post(channelConnectorConfig.transferEndpoint).andReturn().asString();
 
-            logger.info("Post Transfer Response: {}", scenarioScopeState.response);
+        logger.info("Post Transfer Response: {}", scenarioScopeState.response);
     }
 
     @When("I call the transaction request API without required header Platform-TenantId with expected status of {int}")
     public void iCallTheTransactionRequestAPINotHavingRequiredHeaderPlatformTenantIdWithExpectedStatusOf(int expectedStatus) {
-            RequestSpecification requestSpec = Utils.getDefaultSpec();
-            scenarioScopeState.response = RestAssured.given(requestSpec).header("Content-Type", "application/json")
-                    .baseUri(channelConnectorConfig.channelConnectorContactPoint)
-                    .body(scenarioScopeState.createTransactionChannelRequestBody).expect()
-                    .spec(new ResponseSpecBuilder().expectStatusCode(expectedStatus).build()).when()
-                    .post(channelConnectorConfig.transferReqEndpoint).andReturn().asString();
+        RequestSpecification requestSpec = Utils.getDefaultSpec();
+        scenarioScopeState.response = RestAssured.given(requestSpec).header("Content-Type", "application/json")
+                .baseUri(channelConnectorConfig.channelConnectorContactPoint).body(scenarioScopeState.createTransactionChannelRequestBody)
+                .expect().spec(new ResponseSpecBuilder().expectStatusCode(expectedStatus).build()).when()
+                .post(channelConnectorConfig.transferReqEndpoint).andReturn().asString();
 
-            logger.info("Transaction Request Response: {}", scenarioScopeState.response);
+        logger.info("Transaction Request Response: {}", scenarioScopeState.response);
     }
 }
