@@ -9,6 +9,10 @@ import java.util.List;
 import java.util.Map;
 import org.json.JSONObject;
 import org.mifos.connector.common.channel.dto.TransactionChannelRequestDTO;
+import org.mifos.connector.common.mobilemoney.airtel.dto.AirtelCallBackRequestDTO;
+import org.mifos.connector.common.mobilemoney.airtel.dto.AirtelEnquiryResponseDTO;
+import org.mifos.connector.common.mobilemoney.airtel.dto.AirtelPaymentRequestDTO;
+import org.mifos.connector.common.mobilemoney.airtel.dto.AirtelPaymentResponseDTO;
 import org.mifos.integrationtest.common.dto.BatchRequestDTO;
 import org.mifos.integrationtest.common.dto.KeycloakTokenResponse;
 import org.mifos.integrationtest.common.dto.billpayp2g.BillPaymentsReqDTO;
@@ -122,4 +126,11 @@ public class ScenarioScopeState {
     protected String createTransactionChannelRequestBody;
     protected String createGsmaTransferRequestBody;
     protected String rtpId;
+
+    protected AirtelPaymentRequestDTO mockAirtelUSSDPaymentRequest;
+    protected AirtelPaymentResponseDTO airtelPaymentResponseDTO;
+    protected AirtelEnquiryResponseDTO airtelEnquiryResponseDTO;
+    protected AirtelCallBackRequestDTO airtelCallBackRequestDTO;
+    protected String msisdn;
+    protected String transactionStatusCode;
 }

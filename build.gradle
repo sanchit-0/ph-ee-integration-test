@@ -140,7 +140,11 @@ repositories {
     }
 
     maven {
-        url = uri('https://jfrog.sandbox.fynarfin.io/artifactory/fyn-libs-snapshot')
+        url = uri('https://fynarfinhub.jfrog.io/artifactory/ph-ee-repo-local')
+        credentials {
+            username = "maven-repo-user"
+            password = "123QWEasd"
+        }
     }
 }
 
@@ -148,7 +152,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     testImplementation "com.github.tomakehurst:wiremock-jre8:2.35.0"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation 'org.mifos:ph-ee-connector-common:1.8.1-SNAPSHOT'
+    implementation 'org.mifos:ph-ee-connector-common:0.0.0'
     testImplementation "com.google.truth:truth:1.1.3"
     testImplementation 'com.google.code.gson:gson:2.9.0'
     testImplementation('io.rest-assured:rest-assured:5.1.1') {
