@@ -11,7 +11,6 @@ Feature: Channel Collection API test
       | tenant | key1 | key2 |
       | gorilla | MSISDN | accountid |
 
-
   Scenario Outline: Post channel collection API with non-existing BPMN flows
     Given I have tenant as "<tenant>"
     And I have the request body with payer ams identifier keys as "<key1>" and "<key2>"
